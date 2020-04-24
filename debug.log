@@ -1,0 +1,3 @@
+[0424/142107.265:ERROR:file_io_win.cc(161)] CreateFile C:\Users\akade\AppData\Local\Temp\scoped_dir15876_1575010164\Crashpad\settings.dat: Системе не удается найти указанный путь. (0x3)
+[0424/142107.305:ERROR:file_io_win.cc(170)] CreateFile C:\Users\akade\AppData\Local\Temp\scoped_dir15876_1575010164\Crashpad\reports\8d948211-001b-467d-8ad6-b0ab294c1ced.dmp: Системе не удается найти указанный путь. (0x3)
+[0424/142107.305:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
