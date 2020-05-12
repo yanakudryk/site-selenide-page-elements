@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import pages.cartPage.CartPage;
+import pages.myAccountPage.MyAccountPage;
 
 import java.util.List;
 
@@ -19,6 +20,9 @@ public class ShopPage {
 
     @FindBy(how = How.XPATH, using = "//ul[@class='product-categories']/li")
     private List<Category> categories;
+
+    @FindBy(how = How.XPATH, using = "//input[@id='s']")
+    private SelenideElement search;
 
     @FindBy(how = How.XPATH, using = "//a[@class='cart-contents']")
     protected SelenideElement cart;
@@ -47,8 +51,9 @@ public class ShopPage {
         return page(ShopPage.class);
     }
 
-    public void checkAddToCartMessage(String name){
+    public ShopPage checkAddToCartMessage(String name){
         message.should(Condition.matchesText("“" + name + "” has been added to your cart."));
+        return this;
     }
 
     public ShopPage selectCategory(String name){
@@ -67,6 +72,18 @@ public class ShopPage {
         return this;
     }
 
+    public ShopPage searchProduct(String productName){
+        search.val(productName).pressEnter();
+        return page(ShopPage.class);
+    }
+
+    public void checkSearchResults(String name){
+        for (Product p :
+                products) {
+            p.productTitle.shouldHave(text(name));
+        }
+    }
+
     public void checkProductsCategories(String name){
         for (Product p :
                 products) {
@@ -79,6 +96,10 @@ public class ShopPage {
         return page(CartPage.class);
     }
 
+    public MyAccountPage goToMyAccount(){
+        myAccount.click();
+        return page(MyAccountPage.class);
+    }
 
 
 }

@@ -37,9 +37,10 @@ public class CheckOutPage {
     private SelenideElement password;
     @FindBy(how = How.XPATH, using = "//ul[@class='wc_payment_methods payment_methods methods']//input")
     private SelenideElement paymentRadioButton;
-    @FindBy(how = How.XPATH, using = "//button[@id='place_order']")
+    @FindBy(how = How.XPATH, using = "//button[text()='Place order']")
     private SelenideElement placeOrderButton;
-
+    @FindBy(how = How.XPATH, using = "//button[text()='Proceed to PayPal']")
+    private SelenideElement proceedToPayPalButton;
     @FindBy(how = How.XPATH, using = "//*[@class='blockUI blockOverlay']")
     private SelenideElement overlay;
 
@@ -66,6 +67,11 @@ public class CheckOutPage {
     public OrderReceiptPage placeOrder(){
         placeOrderButton.click();
         return page(OrderReceiptPage.class);
+    }
+
+    public PayPalPage proceedToPayPal(){
+        proceedToPayPalButton.click();
+        return page(PayPalPage.class);
     }
 
 
