@@ -6,11 +6,12 @@ import entities.User;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import pages.basePage.BasePage;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 
-public class LostPasswordPage {
+public class LostPasswordPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@id='user_login']")
     private SelenideElement username;
     @FindBy(how = How.XPATH, using = "//button[text()='Reset password']")

@@ -19,7 +19,7 @@ public class BaseTests {
         Configuration.baseUrl = "http://site.com";
         Configuration.timeout = 100000;
         Configuration.startMaximized = true;
-        Configuration.headless = true;
+        Configuration.headless = false;
         addListener(new Highlighter());
         goHome();
     }

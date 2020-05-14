@@ -5,12 +5,13 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import pages.basePage.BasePage;
 import pages.checkOutPage.CheckOutPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.page;
 
-public class CartPage {
+public class CartPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[@class='checkout-button button alt wc-forward']")
     private SelenideElement proceedToCheckOutButton;
 

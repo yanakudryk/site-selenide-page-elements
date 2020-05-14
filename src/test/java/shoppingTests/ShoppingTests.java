@@ -1,10 +1,8 @@
 package shoppingTests;
 
 import baseTests.BaseTests;
-import com.codeborne.selenide.WebDriverRunner;
 import com.github.javafaker.Faker;
 import entities.BillingDetails;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -59,7 +57,7 @@ public class ShoppingTests extends BaseTests {
         shopPage.
                 addProductToCart(PRODUCT_NAME).
                 checkAddToCartMessage(PRODUCT_NAME).
-                openCart().
+                goToCart().
                 checkTotalSum(String.format(Locale.US,"$%.2f", PRODUCT_PRICE * 2)).
                 proceedToCheckOut().
                 fillBillingDetails(billDet).
@@ -87,7 +85,7 @@ public class ShoppingTests extends BaseTests {
         shopPage.
                 addProductToCart(PRODUCT_NAME).
                 checkAddToCartMessage(PRODUCT_NAME).
-                openCart().
+                goToCart().
                 checkTotalSum(String.format(Locale.US,"$%.2f", PRODUCT_PRICE * 2)).
                 proceedToCheckOut().
                 fillBillingDetails(billDet).
@@ -117,7 +115,7 @@ public class ShoppingTests extends BaseTests {
         shopPage.
                 addProductToCart(PRODUCT_NAME).
                 checkAddToCartMessage(PRODUCT_NAME).
-                openCart().
+                goToCart().
                 checkTotalSum(String.format(Locale.US,"$%.2f", PRODUCT_PRICE * 2)).
                 applyCoupon(COUPON_CODE).
                 checkApplyCouponMessage().

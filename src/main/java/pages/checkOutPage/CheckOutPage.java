@@ -6,11 +6,12 @@ import com.codeborne.selenide.SelenideElement;
 import entities.BillingDetails;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import pages.basePage.BasePage;
 
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.Selenide.sleep;
 
-public class CheckOutPage {
+public class CheckOutPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@id='billing_first_name']")
     private SelenideElement firstName;
     @FindBy(how = How.XPATH, using = "//input[@id='billing_last_name']")

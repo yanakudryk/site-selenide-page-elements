@@ -5,11 +5,12 @@ import com.codeborne.selenide.SelenideElement;
 import entities.User;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import pages.basePage.BasePage;
 import pages.lostPasswordPage.LostPasswordPage;
 
 import static com.codeborne.selenide.Selenide.page;
 
-public class MyAccountPage {
+public class MyAccountPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//form[@class='woocommerce-form woocommerce-form-login login']")
     private Login loginForm;

@@ -1,32 +1,27 @@
-package registrationAndLoginAndLogoutTests;
+package productTests;
 
 import baseTests.BaseTests;
 import com.github.javafaker.Faker;
 import entities.User;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pages.basePage.BasePage;
 import pages.shopPage.ShopPage;
 
 import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.page;
-import static credentials.Constants.MAIL_DOMAIN;
-import static credentials.Constants.PASSWORD;
+import static credentials.Constants.*;
 
-public class RegistrationTests extends BaseTests {
-
+public class ReviewsTests extends BaseTests {
     protected ShopPage shopPage;
 
     @BeforeEach
     public void createPages(){
-        shopPage = page(ShopPage.class);
         goHome();
+        shopPage = page(ShopPage.class);
     }
-
     @Test
-    public void testRegistration(){
+    public void testAddProductReview(){
         Faker usFaker = new Faker(new Locale("en-US"));
         User user = new User(
                 usFaker.name().username().concat(MAIL_DOMAIN),
@@ -37,6 +32,11 @@ public class RegistrationTests extends BaseTests {
         shopPage.
                 goToMyAccount().
                 register(user).
-                checkMyAccountMessage(user.getUsername().replace(MAIL_DOMAIN, ""));
+                goToShop().
+                openProduct(PRODUCT_NAME).
+                goToReviews().
+                addReview(PRODUCT_REVIEW_STARS, PRODUCT_REVIEW_COMMENT).
+                checkReview(PRODUCT_REVIEW_STARS, PRODUCT_REVIEW_COMMENT);
+
     }
 }

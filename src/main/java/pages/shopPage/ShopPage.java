@@ -5,15 +5,17 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import pages.basePage.BasePage;
 import pages.cartPage.CartPage;
 import pages.myAccountPage.MyAccountPage;
+import pages.productPage.ProductPage;
 
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.page;
 
-public class ShopPage {
+public class ShopPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//ul[contains(@class,'products columns-4')]/li")
     private List<Product> products;
@@ -24,11 +26,6 @@ public class ShopPage {
     @FindBy(how = How.XPATH, using = "//input[@id='s']")
     private SelenideElement search;
 
-    @FindBy(how = How.XPATH, using = "//a[@class='cart-contents']")
-    protected SelenideElement cart;
-
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'My account')]")
-    protected SelenideElement myAccount;
 
     @FindBy(how = How.XPATH, using = "//*[@class='page-numbers']/li[last()]")
     private SelenideElement nextPage;
@@ -49,6 +46,17 @@ public class ShopPage {
             }
         }
         return page(ShopPage.class);
+    }
+
+    public ProductPage openProduct(String name){
+        for (Product p :
+                products) {
+            if (p.productTitle.has(text(name))) {
+                p.productTitle.click();
+                break;
+            }
+        }
+        return page(ProductPage.class);
     }
 
     public ShopPage checkAddToCartMessage(String name){
@@ -90,16 +98,5 @@ public class ShopPage {
             p.productCategory.shouldHave(text(name));
         }
     }
-
-    public CartPage openCart(){
-        cart.click();
-        return page(CartPage.class);
-    }
-
-    public MyAccountPage goToMyAccount(){
-        myAccount.click();
-        return page(MyAccountPage.class);
-    }
-
 
 }

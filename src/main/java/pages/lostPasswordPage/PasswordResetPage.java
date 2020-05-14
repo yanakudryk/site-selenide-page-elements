@@ -4,8 +4,9 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import pages.basePage.BasePage;
 
-public class PasswordResetPage {
+public class PasswordResetPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@id='password_1']")
     private SelenideElement newPassword;
     @FindBy(how = How.XPATH, using = "//input[@id='password_2']")
