@@ -1,9 +1,8 @@
-package registrationAndLoginAndLogoutTests;
+package loginAndLogoutTests;
 
 import baseTests.BaseTests;
 import entities.User;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pages.mailPage.MailPage;

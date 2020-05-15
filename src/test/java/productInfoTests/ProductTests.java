@@ -1,4 +1,4 @@
-package productTests;
+package productInfoTests;
 
 import baseTests.BaseTests;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package productTests;
+package wishListTests;
 
 import baseTests.BaseTests;
 import com.github.javafaker.Faker;
@@ -9,7 +9,6 @@ import pages.shopPage.ShopPage;
 
 import java.util.Locale;
 
-import static baseTests.BaseTests.goHome;
 import static com.codeborne.selenide.Selenide.page;
 import static credentials.Constants.*;
 
