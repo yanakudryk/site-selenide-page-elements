@@ -17,8 +17,8 @@ public class WishListTests extends BaseTests {
 
     @BeforeEach
     public void createPages(){
-        shopPage = page(ShopPage.class);
         goHome();
+        shopPage = new ShopPage();
     }
     @Test
     public void testAddToWishList() {

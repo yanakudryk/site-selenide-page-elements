@@ -1,4 +1,6 @@
 package pages.addressesPage;
 
-public class AddressesPage {
+import pages.basePage.BasePage;
+
+public class AddressesPage extends BasePage {
 }

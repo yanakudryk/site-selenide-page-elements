@@ -1,4 +1,6 @@
 package pages.accountDetailsPage;
 
-public class AccountDetailsPage {
+import pages.basePage.BasePage;
+
+public class AccountDetailsPage extends BasePage {
 }

@@ -25,6 +25,10 @@ public class CartPage extends BasePage {
     private SelenideElement message;
     @FindBy(how = How.XPATH, using = "//*[@class='blockUI blockOverlay']")
     private SelenideElement overlay;
+    @FindBy(how = How.XPATH, using = "//input[@type='number']")
+    private ElementsCollection quantities;
+    @FindBy(how = How.XPATH, using = "//button[@name='update_cart']")
+    private SelenideElement updateCart;
 
     public CartPage checkTotalSum(String sum){
         overlay.waitWhile(Condition.visible, 50000);
@@ -32,12 +36,23 @@ public class CartPage extends BasePage {
         return this;
     }
 
+    public CartPage setQuantity(String ...quantity){
+        for (SelenideElement number :
+                quantities) {
+            number.val(quantity[quantities.indexOf(number)]);
+        }
+        updateCart.click();
+        return this;
+    }
+
     public CheckOutPage proceedToCheckOut(){
+        overlay.waitWhile(Condition.visible, 50000);
         proceedToCheckOutButton.click();
-        return page(CheckOutPage.class);
+        return new CheckOutPage();
     }
 
     public CartPage applyCoupon(String coupon){
+        overlay.waitWhile(Condition.visible, 50000);
         couponCode.val(coupon);
         applyCouponButton.click();
         return this;

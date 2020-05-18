@@ -18,6 +18,9 @@ public class BasePage {
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Shop')]")
     protected SelenideElement shop;
 
+    public BasePage(){
+        page(this);
+    }
 
     public MyAccountPage goToMyAccount(){
         myAccount.click();

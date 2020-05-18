@@ -25,7 +25,7 @@ public class ShoppingTests extends BaseTests {
     @BeforeEach
     public void createPages(){
         goHome();
-        shopPage = page(ShopPage.class);
+        shopPage = new ShopPage();
     }
 
     public static Stream<Arguments> paymentMethodsProvider(){
@@ -58,7 +58,8 @@ public class ShoppingTests extends BaseTests {
                 addProductToCart(PRODUCT_NAME).
                 checkAddToCartMessage(PRODUCT_NAME).
                 goToCart().
-                checkTotalSum(String.format(Locale.US,"$%.2f", PRODUCT_PRICE * 2)).
+                setQuantity(PRODUCT_QUANTITY).
+                checkTotalSum(String.format(Locale.US,"$%.2f", PRODUCT_PRICE * Integer.parseInt(PRODUCT_QUANTITY))).
                 proceedToCheckOut().
                 fillBillingDetails(billDet).
                 placeOrder().
@@ -86,7 +87,8 @@ public class ShoppingTests extends BaseTests {
                 addProductToCart(PRODUCT_NAME).
                 checkAddToCartMessage(PRODUCT_NAME).
                 goToCart().
-                checkTotalSum(String.format(Locale.US,"$%.2f", PRODUCT_PRICE * 2)).
+                setQuantity(PRODUCT_QUANTITY).
+                checkTotalSum(String.format(Locale.US,"$%.2f", PRODUCT_PRICE * Integer.parseInt(PRODUCT_QUANTITY))).
                 proceedToCheckOut().
                 fillBillingDetails(billDet).
                 proceedToPayPal().
@@ -112,17 +114,55 @@ public class ShoppingTests extends BaseTests {
                         true,
                         PASSWORD,
                         PAYMENT_METHOD);
+        String sum =
+                String.format(Locale.US,"$%.2f",
+                        PRODUCT_PRICE * Integer.parseInt(PRODUCT_QUANTITY) - COUPON_DISCOUNT);
         shopPage.
                 addProductToCart(PRODUCT_NAME).
                 checkAddToCartMessage(PRODUCT_NAME).
                 goToCart().
-                checkTotalSum(String.format(Locale.US,"$%.2f", PRODUCT_PRICE * 2)).
+                setQuantity(PRODUCT_QUANTITY).
                 applyCoupon(COUPON_CODE).
                 checkApplyCouponMessage().
-                checkTotalSum(String.format(Locale.US,"$%.2f", PRODUCT_PRICE * 2 - COUPON_DISCOUNT)).
+                checkTotalSum(sum).
                 proceedToCheckOut().
                 fillBillingDetails(billDet).
                 placeOrder().
-                checkTotalSum(String.format(Locale.US,"$%.2f", PRODUCT_PRICE * 2 - COUPON_DISCOUNT));
+                checkTotalSum(sum);
     }
+
+    @Test
+    public void testPlaceOrderWithDifferentProductsAndQuantities(){
+        Faker usFaker = new Faker(new Locale("en-US"));
+        BillingDetails billDet =
+                new BillingDetails(
+                        usFaker.name().firstName(),
+                        usFaker.name().lastName(),
+                        usFaker.company().name(),
+                        usFaker.address().streetAddress(),
+                        usFaker.address().streetAddressNumber(),
+                        usFaker.address().city(),
+                        usFaker.address().state(),
+                        usFaker.address().zipCode(),
+                        usFaker.phoneNumber().cellPhone(),
+                        usFaker.name().username().concat(MAIL_DOMAIN),
+                        true,
+                        PASSWORD,
+                        PAYMENT_METHOD);
+
+        String sum = String.format(Locale.US, "$%.2f",
+                PRODUCT_PRICE * Integer.parseInt(PRODUCT_QUANTITY) +
+                        PRODUCT_PRICE_1 * Integer.parseInt(PRODUCT_QUANTITY_1));
+        shopPage.
+                addProductToCart(PRODUCT_NAME).
+                addProductToCart(PRODUCT_NAME_1).
+                goToCart().
+                setQuantity(PRODUCT_QUANTITY, PRODUCT_QUANTITY_1).
+                checkTotalSum(sum).
+                proceedToCheckOut().
+                fillBillingDetails(billDet).
+                placeOrder().
+                checkTotalSum(sum);
+    }
+
 }

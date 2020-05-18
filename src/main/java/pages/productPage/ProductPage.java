@@ -86,7 +86,8 @@ public class ProductPage extends BasePage {
 
     public WishListPage checkThatProductIsAddedToWishList(String name){
         wishListMessage.shouldHave(Condition.text("\""+ name + "\" added to Wishlist"));
-        return page(WishListPage.class);
+        //redirect...to Wish List page
+        return new WishListPage();
 
     }
     public ProductPage goToReviews(){

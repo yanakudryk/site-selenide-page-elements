@@ -5,8 +5,11 @@ import entities.User;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import pages.mailPage.MailPage;
 import pages.shopPage.ShopPage;
+
+import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Selenide.page;
 import static credentials.Constants.*;
@@ -15,21 +18,30 @@ import static credentials.MailCredentials.MAIL_PASSWORD;
 
 public class LoginTests extends BaseTests {
     protected ShopPage shopPage;
-    protected MailPage mailPage;
+    //protected MailPage mailPage;
     @BeforeEach
     public void createPages(){
         goHome();
-        shopPage = page(ShopPage.class);
-        mailPage = page(MailPage.class);
+        shopPage = new ShopPage();
+        //mailPage = new MailPage();
     }
 
     @Test
-    public void testLogin(){
+    public void testValidLogin(){
         User user = new User(MAIL_EMAIL_2, PASSWORD, FIRST_NAME, LAST_NAME);
         shopPage.
                 goToMyAccount().
                 login(user, false).
                 checkMyAccountMessage(FIRST_NAME);
+    }
+
+    @Test
+    public void testInvalidLogin(){
+        User user = new User(MAIL_EMAIL_2, INVALID_PASSWORD, FIRST_NAME, LAST_NAME);
+        shopPage.
+                goToMyAccount().
+                login(user,false).
+                checkIncorrectPasswordOnLoginErrorMessage(MAIL_EMAIL_2);
     }
 
     @Test
@@ -40,10 +52,8 @@ public class LoginTests extends BaseTests {
                 goToMyAccount().
                 lostPassword().
                 resetPassword(user).
-                checkLostPasswordMessage();
-
-        mailPage.
-                followPasswordResetLinkFromMail(MAIL_EMAIL_2, MAIL_PASSWORD).
+                checkLostPasswordMessage().
+                followPasswordResetLinkFromMail().
                 setNewPassword(PASSWORD).
                 checkResetPasswordMessage();
     }

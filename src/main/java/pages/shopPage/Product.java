@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.page;
 
 public class Product extends ElementsContainer{
@@ -25,5 +26,4 @@ public class Product extends ElementsContainer{
 
     @FindBy(how = How.XPATH, using = "div//*[@class = 'tinvwl_add_to_wishlist-text']")
     protected SelenideElement productAddToWishlistButton;
-
 }

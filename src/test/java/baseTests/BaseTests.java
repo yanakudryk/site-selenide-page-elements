@@ -20,8 +20,8 @@ public class BaseTests {
         Configuration.timeout = 100000;
         Configuration.startMaximized = true;
         Configuration.headless = false;
+        //Configuration.pageLoadStrategy = "normal";
         addListener(new Highlighter());
-        goHome();
     }
 
     @AfterEach

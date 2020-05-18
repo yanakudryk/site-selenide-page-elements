@@ -2,6 +2,7 @@ package pages.shopPage;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -10,10 +11,12 @@ import pages.cartPage.CartPage;
 import pages.myAccountPage.MyAccountPage;
 import pages.productPage.ProductPage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.Selenide.refresh;
 
 public class ShopPage extends BasePage {
 
@@ -36,7 +39,6 @@ public class ShopPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//p[@class='woocommerce-result-count']")
     private SelenideElement resultCount;
 
-
     public ShopPage addProductToCart(String name) {
         for (Product p :
                 products) {
@@ -45,7 +47,7 @@ public class ShopPage extends BasePage {
                 break;
             }
         }
-        return page(ShopPage.class);
+        return new ShopPage();
     }
 
     public ProductPage openProduct(String name){
@@ -56,7 +58,7 @@ public class ShopPage extends BasePage {
                 break;
             }
         }
-        return page(ProductPage.class);
+        return new ProductPage();
     }
 
     public ShopPage checkAddToCartMessage(String name){
@@ -72,7 +74,7 @@ public class ShopPage extends BasePage {
                 return page(ShopPage.class);
             }
         }
-        return page(ShopPage.class);
+        return new ShopPage();
     }
 
     public ShopPage checkShopCategory(String name){
@@ -82,7 +84,7 @@ public class ShopPage extends BasePage {
 
     public ShopPage searchProduct(String productName){
         search.val(productName).pressEnter();
-        return page(ShopPage.class);
+        return new ShopPage();
     }
 
     public void checkSearchResults(String name){

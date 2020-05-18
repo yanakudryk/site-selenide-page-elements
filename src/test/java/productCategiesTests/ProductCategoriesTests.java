@@ -16,7 +16,7 @@ public class ProductCategoriesTests extends BaseTests {
     @BeforeEach
     public void createPages(){
         goHome();
-        shopPage = page(ShopPage.class);
+        shopPage = new ShopPage();
     }
 
     @Test

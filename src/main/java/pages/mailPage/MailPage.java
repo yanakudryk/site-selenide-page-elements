@@ -4,10 +4,12 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import pages.basePage.BasePage;
 import pages.lostPasswordPage.PasswordResetPage;
 import static com.codeborne.selenide.Selenide.*;
+import static utils.ReadEmail.getUrlsFromMessage;
 
-public class MailPage {
+public class MailPage extends BasePage {
     @FindBy(how = How.NAME, using = "username")
     private SelenideElement username;
     @FindBy(how = How.NAME, using = "password")
@@ -44,8 +46,10 @@ public class MailPage {
         openLastMailMessageFromMail(email, password);
         messageSubject.shouldHave(Condition.matchesText("Password Reset Request for site"));
         resetPasswordLink.click();
+
+
         switchTo().window(2);
-        return page(PasswordResetPage.class);
+        return new PasswordResetPage();
 
     }
 }

@@ -2,6 +2,7 @@ package credentials;
 
 public interface Constants {
     String PASSWORD = "123asdQQ!!!098upd";
+    String INVALID_PASSWORD = "123asdQQ!!!098upd1";
     String FIRST_NAME = "Jane";
     String LAST_NAME = "Doe";
     String MAIL_DOMAIN = "@email.com";
@@ -21,6 +22,10 @@ public interface Constants {
             " vitae, ultricies eget, tempor sit amet, ante." +
             " Donec eu libero sit amet quam egestas semper. Aenean" +
                     " ultricies mi vitae est. Mauris placerat eleifend leo.";
+    String PRODUCT_QUANTITY = "1";
+    String PRODUCT_NAME_1 = "Flying Ninja";
+    Double PRODUCT_PRICE_1 = 12.00;
+    String PRODUCT_QUANTITY_1 = "5";
     String PRODUCT_REVIEW_COMMENT =
             "On the other hand, we denounce with righteous " +
                     "indignation and dislike men who are so" +

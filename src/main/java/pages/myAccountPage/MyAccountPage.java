@@ -33,6 +33,9 @@ public class MyAccountPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='u-column1 col-1']/h2")
     private SelenideElement loginHeader;
 
+    @FindBy(how = How.XPATH, using = "//div[@id='content']//li[1]")
+    private SelenideElement loginErrorMessage;
+
     public MyAccountPage login(User user, Boolean rememberMe){
         loginForm.username.val(user.getUsername());
         loginForm.password.val(user.getPassword());
@@ -43,7 +46,7 @@ public class MyAccountPage extends BasePage {
 
     public LostPasswordPage lostPassword(){
         loginForm.lostPassword.click();
-        return page(LostPasswordPage.class);
+        return new LostPasswordPage();
     }
 
     public MyAccountPage register(User user){
@@ -62,6 +65,12 @@ public class MyAccountPage extends BasePage {
 
     public void checkEditAccountMessage(){
         message.shouldHave(Condition.matchesText("Account details changed successfully."));
+    }
+
+    public void checkIncorrectPasswordOnLoginErrorMessage(String email){
+        loginErrorMessage.shouldHave(Condition.text(
+                "Error: The password you entered for the email address "
+                        + email + " is incorrect. Lost your password?"));
     }
 
     public void checkMyAccountMessage(String name){

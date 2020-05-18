@@ -67,12 +67,12 @@ public class CheckOutPage extends BasePage {
 
     public OrderReceiptPage placeOrder(){
         placeOrderButton.click();
-        return page(OrderReceiptPage.class);
+        return new OrderReceiptPage();
     }
 
     public PayPalPage proceedToPayPal(){
         proceedToPayPalButton.click();
-        return page(PayPalPage.class);
+        return new PayPalPage();
     }
 
 

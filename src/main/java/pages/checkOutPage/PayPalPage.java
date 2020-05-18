@@ -4,10 +4,11 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import pages.basePage.BasePage;
 
 import static com.codeborne.selenide.Selenide.page;
 
-public class PayPalPage {
+public class PayPalPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@id='email']")
     private SelenideElement email;
     @FindBy(how = How.XPATH, using = "//input[@id='password']")
@@ -25,6 +26,6 @@ public class PayPalPage {
     }
     public OrderReceiptPage clickPayNow(){
         payNowButton.click();
-        return page(OrderReceiptPage.class);
+        return new OrderReceiptPage();
     }
 }
