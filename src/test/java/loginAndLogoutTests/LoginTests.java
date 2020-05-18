@@ -5,16 +5,11 @@ import entities.User;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
-import pages.mailPage.MailPage;
 import pages.shopPage.ShopPage;
-
-import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Selenide.page;
 import static credentials.Constants.*;
 import static credentials.MailCredentials.MAIL_EMAIL_2;
-import static credentials.MailCredentials.MAIL_PASSWORD;
 
 public class LoginTests extends BaseTests {
     protected ShopPage shopPage;
